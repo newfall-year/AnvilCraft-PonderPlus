@@ -1,0 +1,12 @@
+# 统一换行：文本走 LF，Windows 脚本保持 CRLF，二进制别碰
+* text=auto eol=lf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+gradlew text eol=lf
+
+# 二进制资源（nbt 结构文件必须是二进制，否则会被换行转换破坏）
+*.jar binary
+*.nbt binary
+*.png binary
+*.ogg binary
+*.zip binary

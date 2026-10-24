@@ -1,0 +1,44 @@
+# 1.21.1（NeoForge 21.1.x）必须显式声明 modLoader / loaderVersion；license 必填。
+# 花括号占位符由 build.gradle 的 processResources 在构建时展开（值来自 gradle.properties）。
+# 注意：不要在本文件里写“美元号+花括号”形式的示例文字，它会被 Groovy 模板当表达式求值导致构建失败。
+modLoader="javafml"
+loaderVersion="[1,)"
+license="${mod_license}"
+
+[[mods]]
+modId="${mod_id}"
+version="${mod_version}"
+# displayName / description 直接写死：中文走 properties 占位符会被 ISO-8859-1 读乱。
+displayName="AnvilCraft：Ponder Plus"
+authors="${mod_authors}"
+description="为铁砧工艺添加了思索模组内容"
+
+[[dependencies.${mod_id}]]
+modId="neoforge"
+type="required"
+versionRange="${neo_version_range}"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.${mod_id}]]
+modId="minecraft"
+type="required"
+versionRange="${minecraft_version_range}"
+ordering="NONE"
+side="BOTH"
+
+# 软依赖：Ponder 是纯客户端库，没装也不该拦住本模组（代码里 ModList.isLoaded 兜底）。
+[[dependencies.${mod_id}]]
+modId="ponder"
+type="optional"
+versionRange="[1.0.0,2.0.0)"
+ordering="AFTER"
+side="CLIENT"
+
+# 软依赖：AnvilCraft 只用来提供被思索的物品；本模组不引用它的 Java 类。
+[[dependencies.${mod_id}]]
+modId="anvilcraft"
+type="optional"
+versionRange="[1.0.0,)"
+ordering="AFTER"
+side="BOTH"

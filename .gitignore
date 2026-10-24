@@ -1,0 +1,28 @@
+# ---- Gradle / 构建产物 ----
+.gradle/
+build/
+*.hprof
+
+# ---- 开发运行目录（runClient / runServer 生成的世界、日志、mods）----
+run/
+runs/
+run-*/
+
+# ---- IDE ----
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.settings/
+.classpath
+.project
+out/
+
+# ---- 系统 ----
+.DS_Store
+Thumbs.db
+
+# ---- 本地日志 / 崩溃报告 ----
+logs/
+crash-reports/

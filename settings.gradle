@@ -1,0 +1,37 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        // 国内直连 maven.neoforged.net 常常超时，插件仓库走镜像
+        maven { url = "https://neoforged.forgecdn.net/releases" }
+    }
+}
+
+plugins {
+    id 'org.gradle.toolchains.foojay-resolver-convention' version '1.0.0'
+}
+
+rootProject.name = "anvilcraft-ponder-plus"
+
+// 统一在 settings 里声明仓库：maven.neoforged.net 在本机/国内网络经常连不上（socket timeout），
+// 用官方 ForgeCDN 镜像替代；这个块优先于各工程自带仓库（PREFER_SETTINGS）。
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+    repositories {
+        maven { url = "https://neoforged.forgecdn.net/releases" }
+        maven { url = "https://neoforged.forgecdn.net/mojang-meta" }
+        maven { url = "https://maven.createmod.net" }                       // Ponder / Flywheel
+        maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" }
+        maven {                                                             // AnvilCraft / AnvilLib / Ageratum
+            url = "https://server.cjsah.net:1002/maven/releases/"
+            content {
+                includeGroup "dev.dubhe"
+                includeGroup "dev.anvilcraft.lib"
+                includeGroup "dev.anvilcraft.resource"
+            }
+        }
+        // 想在 dev 里加 JEI 时再打开（mezz.jei 走这个仓库）：
+        // maven { url = "https://maven.blamejared.com/" }
+        mavenCentral()
+        maven { url = "https://libraries.minecraft.net/" }
+    }
+}
